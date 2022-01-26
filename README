@@ -1,0 +1,6 @@
+# DotVimrc
+
+## Note
+- User configuration directory -> .DotVimrc.d
+	+ general -> .DotVimrc.d/vimrc.vim
+	+ plugins -> .DotVimrc.d/plugins.yaml

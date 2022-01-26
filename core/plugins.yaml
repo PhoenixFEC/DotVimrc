@@ -1,0 +1,18 @@
+# PackageManage{{{
+- repo: Shougo/dein.vim
+  on_func: dein#
+# }}}
+
+# Editor UI{{{
+- repo: ryanoasis/vim-devicons
+
+- repo: glepnir/oceanic-material
+
+- repo: glepnir/spaceline.vim
+  hook_add: |
+    let g:spaceline_seperate_style = 'none'
+    let g:spaceline_colorscheme = 'space'
+    let g:spaceline_git_branch_icon= ''
+
+- repo: hardcoreplayers/vim-buffet
+#}}}
