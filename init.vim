@@ -15,7 +15,7 @@ let $VIM_PATH = fnamemodify(resolve(expand('<sfile>')), ':h')
 let g:vim_path = $VIM_PATH
 
 if has('vim_starting')
-  " when using viminit trick for exotic myvimrc locations, add path now.
+  " When using viminit trick for exotic myvimrc locations, add path now.
   if &runtimepath !~# $VIM_PATH
     set runtimepath+=$VIM_PATH
   endif

@@ -1,3 +1,4 @@
+" Source basic configuration---------------------
 call DotVimrc#utils#source_file($VIM_PATH, 'core/general.vim')
 
 let s:user_vimrc = expand($USER_CONF_DIRECTORY . '/vimrc.vim')
@@ -6,9 +7,8 @@ if filereadable(s:user_vimrc) && readfile(s:user_vimrc)
 	call DotVimrc#utils#source_file(s:user_vimrc)
 endif
 
-" call DotVimrc#utils#source_file($VIM_PATH, 'core/plugins.vim')
 
-"add plugin Scripts-----------------------------
+"Source plugin configuration-----------------------------
 if has('vim_starting')
   if $VIM_PLUGIN_MANAGER == 'dein'
     " Required:
@@ -36,9 +36,10 @@ else
   call DotVimrc#plugins#use_vim_plug()
 endif
 
-" Required:
 filetype plugin indent on
+filetype indent on
+
 if has('vim_starting')
   syntax enable
 endif
-"End -> add plugin Scripts-------------------------
+"End -> Source plugin configuration-------------------------

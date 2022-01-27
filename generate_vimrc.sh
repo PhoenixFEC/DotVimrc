@@ -18,8 +18,8 @@ if [ ! -d ${HOME}/.config ];
   then $(mkdir ${HOME/.config})
 fi
 # TODO: copy to `.config` directory
-$(ln -snfi ${REAL_VIM_PATH} ${VIMRC_PATH})
-# $(cp -af ${REAL_VIM_PATH} ${VIMRC_PATH})
+# $(ln -snfi ${REAL_VIM_PATH} ${VIMRC_PATH})
+$(cp -af ${REAL_VIM_PATH} ${VIMRC_PATH})
 
 # config Git Credential to cache(900s)
 $(git config --global credential.helper cache)

@@ -79,18 +79,27 @@ function! s:add_plugin(config_paths) abort
     return
   endif
 
-  for plugin in l:rc
-    call dein#add(plugin['repo'], extend(plugin, {}, 'keep'))
-    if &runtimepath !~# '/dein.vim'
-      set runtimepath+=$DEIN_CACHE_PATH/repos/github.com/Shougo/dein.vim
-    elseif &runtimepath !~# plugin['repo']
-      execute 'set runtimepath+=$DEIN_CACHE_PATH/repos/github.com/' . plugin['repo']
-    endif
-  endfor
+  if $VIM_PLUGIN_MANAGER == 'dein'
+    for plugin in l:rc
+      call dein#add(plugin['repo'], extend(plugin, {}, 'keep'))
+      if &runtimepath !~# '/dein.vim'
+        set runtimepath+=$DEIN_CACHE_PATH/repos/github.com/Shougo/dein.vim
+      elseif &runtimepath !~# plugin['repo']
+        execute 'set runtimepath+=$DEIN_CACHE_PATH/repos/github.com/' . plugin['repo']
+      endif
+    endfor
+  else
+    " vim-plug here
+  endif
 
   " Add any local plugins
+  " TODO: add plugins in the user configuration directory
   if isdirectory($VIM_PATH . '/plugins')
-    call dein#local($VIM_PATH . '/plugins', { 'frozen': 1, 'merged': 0 })
+    if $VIM_PLUGIN_MANAGER == 'dein'
+      call dein#local($VIM_PATH . '/plugins', { 'frozen': 1, 'merged': 0 })
+    else
+      " vim-plug
+    endif
   endif
 endfunction
 
@@ -98,7 +107,7 @@ function! s:load_user_plugins(plugin_files) abort
     " Filter non-existent config paths
     call filter(s:config_paths, 'filereadable(v:val)')
 
-  " check the user plugins
+  " Check the user plugins
   if filereadable(a:plugin_files)
     let content = readfile(a:plugin_files)
     if !empty(content)

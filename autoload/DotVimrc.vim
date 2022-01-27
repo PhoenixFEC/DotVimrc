@@ -1,4 +1,4 @@
-" set the user config file
+" Set the user config file
 " let s:user_init_config = expand($DOTVIMRC.'/init.vim')
 
 " Disable vim distribution plugins
@@ -57,11 +57,11 @@ let g:thinkvim_disable_pmaping = []
 " call utils#source_file($VIM_PATH,'keybinds/keybinds.vim')
 
 " Initialize user favorite colorscheme
-call theme#init()
+" call theme#init()
 
-if exists("*UserInit")
-	call UserInit()
-endif
+" if exists("*UserInit")
+" 	call UserInit()
+" endif
 
 set secure
 
