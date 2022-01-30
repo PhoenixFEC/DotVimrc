@@ -74,6 +74,7 @@ endfunction
 
 function! s:add_plugin(config_paths) abort
   let l:rc = s:parse_config_files()
+
   if empty(l:rc)
     call s:error('Empty plugin list')
     return
@@ -90,6 +91,15 @@ function! s:add_plugin(config_paths) abort
     endfor
   else
     " vim-plug here
+    for plugin in l:rc
+      if plugin['repo'] !~ 'dein.vim'
+        Plug plugin['repo']
+      endif
+
+      if has_key(plugin, 'hook_add')
+        execute plugin['hook_add']
+      endif
+    endfor
   endif
 
   " Add any local plugins
@@ -98,7 +108,8 @@ function! s:add_plugin(config_paths) abort
     if $VIM_PLUGIN_MANAGER == 'dein'
       call dein#local($VIM_PATH . '/plugins', { 'frozen': 1, 'merged': 0 })
     else
-      " vim-plug
+      " vim-plug here
+      Plug plugin['repo']
     endif
   endif
 endfunction
