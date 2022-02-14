@@ -1,7 +1,5 @@
 " Source basic configuration---------------------
 call DotVimrc#utils#source_file($VIM_PATH, 'core/general.vim')
-call DotVimrc#utils#source_file($VIM_PATH, 'core/plugins.vim')
-call DotVimrc#utils#source_file($VIM_PATH, 'core/keybinds.vim')
 
 let s:user_vimrc = expand($USER_CONF_DIRECTORY . '/vimrc.vim')
 if filereadable(s:user_vimrc) && readfile(s:user_vimrc)
@@ -38,6 +36,11 @@ else
   call DotVimrc#plugins#use_vim_plug()
 endif
 
+call DotVimrc#utils#source_file($VIM_PATH, 'core/plugins.vim')
+call DotVimrc#utils#source_file($VIM_PATH, 'core/keybinds.vim')
+call DotVimrc#utils#source_file($VIM_PATH, 'core/autofixTypos.vim')
+
+filetype on
 filetype plugin indent on
 filetype indent on
 

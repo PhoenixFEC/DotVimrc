@@ -1,8 +1,8 @@
 " init.vim --- Entry file for vim
 
 " Let Vim use utf-8 internally, because many scripts require this
-set encoding=utf8
-scriptencoding utf8
+set encoding=utf-8
+scriptencoding utf-8
 
 " Set data/cache directory as $XDG_CACHE_HOME/vim
 let $DATA_PATH = expand('~/.cache' . '/DotVimrc')

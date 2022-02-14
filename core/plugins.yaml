@@ -6,25 +6,15 @@
 # Editor UI{{{
 - repo: glepnir/oceanic-material
 
-# set guifont=DroidSansMono\ Nerd\ Font:h11
-- repo: ryanoasis/vim-devicons
-  hook_add: |
-    set guifont=DroidSansMono\ Nerd\ Font:h11
-    let g:webdevicons_enable = 1
-    let g:webdevicons_enable_nerdtree = 1
-    let g:webdevicons_conceal_nerdtree_brackets = 1
-    let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
-
 - repo: glepnir/spaceline.vim
-  hook_add: |
-    let g:spaceline_seperate_style = "curve"
-    let g:spaceline_colorscheme = "space"
-
-- repo: bagrat/vim-buffet
 
 - repo: preservim/nerdtree
   hook_add: |
     let g:NERDTreeDirArrowExpandable = '+'
     let g:NERDTreeDirArrowCollapsible = '-'
+
+- repo: ryanoasis/vim-devicons
+
+- repo: bagrat/vim-buffet
 
 #}}}
