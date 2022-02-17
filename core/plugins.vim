@@ -1,11 +1,12 @@
 scriptencoding utf-8
 
 " glepnir/oceanic-material
-" set background=dark
+set background=dark
 colorscheme oceanic_material
+" colorscheme vim-material
 
 " ryanoasis/vim-devicons
-set guifont=DroidSansMono_Nerd_Font:h11
+set guifont=HackNerdFontComplete\ Nerd\ Font\ Mono:h11
 " set guifont=Droid\ Sans\ Mono\ Dotted\ for\ Powerline:h11
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_nerdtree = 1
@@ -13,7 +14,7 @@ let g:webdevicons_conceal_nerdtree_brackets = 1
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
 
 " glepnir/spaceline.vim
-let g:spaceline_seperate_style = "none"
+let g:spaceline_seperate_style = "arrow-fade"
 let g:spaceline_colorscheme = "space"
 
 " bagrat/vim-buffet

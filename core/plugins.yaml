@@ -5,6 +5,7 @@
 
 # Editor UI{{{
 - repo: glepnir/oceanic-material
+# - repo: hzchirs/vim-material
 
 - repo: glepnir/spaceline.vim
 
