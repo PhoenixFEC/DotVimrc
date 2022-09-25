@@ -75,10 +75,10 @@ nnoremap <C-l> <C-w>l
 " switch between windows by hitting <Tab> twice
 nnoremap <silent> <Tab><Tab> <C-w>w
 " window resizing
-" map <S-Left> <C-w><
-" map <S-Down> <C-w>-
-" map <S-Up> <C-w>+
-" map <S-Right> <C-w>>
+map <S-Left> <C-w><
+map <S-Down> <C-w>-
+map <S-Up> <C-w>+
+map <S-Right> <C-w>>
 " <leader>q quits the current window
 nnoremap <silent> <leader>q :q<CR>
 inoremap <silent> <leader>q <ESC>:q<CR>
@@ -99,6 +99,7 @@ try
 finally
   redir END
 endtry
+
 " CTRL+A moves to start of line in command mode
 cnoremap <C-a> <home>
 " CTRL+E moves to end of line in command mode

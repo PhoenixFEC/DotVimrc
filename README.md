@@ -4,10 +4,12 @@ Borrowing shamelessly from ThinkVim, SpaceVim, vimrc, thanks for them.
 	```bash
 	git clone ....
 	cd CDotVimrc
-	# or use vim-plug (default)
-	sh generate_vimrc.sh
 	# plug manager with dein.vim
 	# sh generate_vimrc.sh dein
+	# or use vim-plug (default)
+	sh generate_vimrc.sh
+  # If the `generate_vimrc.sh` has not "x" permission, you must execute below command first:
+  # chmod u+x generate_vimrc.sh
 	```
 ## User configuration
 	- directory -> .DotVimrc.d

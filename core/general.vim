@@ -70,8 +70,8 @@ set nowrap
 set textwidth=80
 set linebreak " Break long lines at 'breakat'
 
-set scrolloff=1
-set scrolloff=4 " number of lines to keep above and below the cursor
+" set scrolloff=1
+set scrolloff=2 " number of lines to keep above and below the cursor
 set sidescrolloff=5
 
 set showcmd
@@ -176,7 +176,8 @@ set wildmode=longest:list,full
 set wildignorecase
 set wildignore+=.git,.svn  " ignore the .git directory
 set wildignore+=*.DS_Store  " ignore Mac finder/spotlight crap
-set wildignore+=**/node_modules/**,**/bower_modules/**,*/.sass-cache/*
+set wildignore+=**/node_modules/**,**/bower_modules/**
+set wildignore+=**/.sass-cache/**,**/npm-cache/**
 set wildignore+=__pycache__,*.egg-info,.pytest_cache,.mypy_cache/**
 " }}}
 

@@ -7,7 +7,7 @@ REAL_VIM_PATH=$(pwd)
 VIMRC_PATH="${HOME}/.config/DotVimrc"
 THIS_TIME=$(date +%c)
 
-# vim-plug is default, you can specify dein.vim by first arg with "dein"
+# "vim-plug" is default, you can specify "dein.vim" with the first arg "dein"
 if [ $1 ] && [ x$1 == xdein ];
   then VIM_PLUGIN_MANAGER="dein.vim"
 else
@@ -37,6 +37,6 @@ source ${VIMRC_PATH}/init.vim
 echo "___________________________________________________________"
 echo "==========================================================="
 echo ">*"
-echo ">* Generated the Vim Configuration successfully! Enjoy it :)"
+echo ">* Generated the Vim Configuration successfully! "
 echo ">*"
 echo "==========================================================="
