@@ -7,11 +7,15 @@
 - repo: glepnir/oceanic-material
 # - repo: hzchirs/vim-material
 
-- repo: glepnir/spaceline.vim
+## Status Bar
+# - repo: glepnir/spaceline.vim
+- repo: itchyny/lightline.vim
+  hook_add: |
+    let g:lightline = {'colorscheme': 'one'}
 
 - repo: preservim/nerdtree
   hook_add: |
-    let g:NERDTreeDirArrowExpandable = '+'
+    let g:NERDTreeDirArrowExpandable = '>'
     let g:NERDTreeDirArrowCollapsible = '-'
 
 - repo: ryanoasis/vim-devicons

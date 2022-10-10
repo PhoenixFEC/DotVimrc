@@ -48,7 +48,10 @@ set redrawtime=1500  " Time in milliseconds for stopping display redraw
 set background=dark
 set term=xterm
 set termguicolors  " Enable true color
-set t_Co=256  " Enable colour 256
+"  set t_Co=256  " Enable colour 256
+if !has('gui_running')
+  set t_Co=256
+endif
 set number  " Enable line number
 set relativenumber
 
@@ -66,13 +69,6 @@ set display+=lastline
 set laststatus=2  " Show status. 0 -> Hidden, 1 -> When multi-window, 2 -> Show Always
 
 set nowrap
-" set wrapmargin=2
-set textwidth=80
-set linebreak " Break long lines at 'breakat'
-
-" set scrolloff=1
-set scrolloff=2 " number of lines to keep above and below the cursor
-set sidescrolloff=5
 
 set showcmd
 set cmdheight=1 " Height of the command bar
@@ -82,6 +78,14 @@ set showmode
 set showmatch
 set matchpairs+=<:>  " Add HTML brackets to pair matching
 set matchtime=1  " Tenths of a second to show the matching paren
+
+" set wrapmargin=2
+set textwidth=80
+set linebreak " Break long lines at 'breakat'
+
+" set scrolloff=1
+set scrolloff=2 " number of lines to keep above and below the cursor
+set sidescrolloff=5
 
 " Search {{{
 set ignorecase  " Search ignoring case

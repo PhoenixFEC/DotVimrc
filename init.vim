@@ -28,3 +28,4 @@ if has('vim_starting')
 endif
 
 execute 'source ' . fnamemodify(expand('<sfile>'), ':h') . '/core/main.vim'
+"  execute 'PlugStatus'

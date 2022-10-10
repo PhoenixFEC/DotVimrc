@@ -1,13 +1,13 @@
 scriptencoding utf-8
 
 let $DEIN_CACHE_PATH = $HOME . '/.cache/dein'
-
-" Collection of user plugin list config file-paths
 let s:config_paths = get(g:, 'etc_config_paths', [
-  \ $VIM_PATH . '/core/plugins.yaml'
+  \ $VIM_PATH . '/core/pluginList.json'
   \ ])
 
-let s:user_plugins = expand($USER_CONF_DIRECTORY . '/plugins.yaml')
+" Collection of user plugin list config file-paths
+"  let s:user_plugins = expand($USER_CONF_DIRECTORY . '/plugins.yaml')
+let s:user_plugins = expand($USER_CONF_DIRECTORY . '/plugins.vim')
 
 " call DotVimrc#utils#generate_coc_json()
 
@@ -33,6 +33,9 @@ function! DotVimrc#plugins#use_vim_plug() abort
   " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
   " Plug 'junegunn/vim-easy-align'
   call s:add_plugin(s:config_paths)
+
+  "  test current config path
+  "  echo s:config_paths
 
   " Initialize plugin system
   call plug#end()
@@ -92,12 +95,16 @@ function! s:add_plugin(config_paths) abort
   else
     " vim-plug here
     for plugin in l:rc
-      if plugin['repo'] !~ 'dein.vim'
-        Plug plugin['repo']
+      "  filter non-vim_plug
+      if string(plugin['pluginManager']) !~ 'vim_plug'
+        return
       endif
 
-      if has_key(plugin, 'hook_add')
-        execute plugin['hook_add']
+      "  Install current plugin
+      if has_key(plugin, 'conf')
+        Plug plugin['repo'], plugin['conf']
+      else
+        Plug plugin['repo']
       endif
     endfor
   endif
@@ -144,30 +151,7 @@ function! s:parse_config_files() abort
     echomsg 'Caught: ' v:exception
   endtry
 
-  " If there's more than one config file source,
-  " de-duplicate plugins by repo key.
-  if len(s:config_paths) > 1
-    call s:dedupe_plugins(l:merged)
-  endif
   return l:merged
-endfunction
-
-function! s:dedupe_plugins(list) abort
-  let l:list = reverse(a:list)
-  let l:i = 0
-  let l:seen = {}
-  while i < len(l:list)
-    let l:key = list[i]['repo']
-    if l:key !=# '' && has_key(l:seen, l:key)
-      call remove(l:list, i)
-    else
-      if l:key !=# ''
-        let l:seen[l:key] = 1
-      endif
-      let l:i += 1
-    endif
-  endwhile
-  return reverse(l:list)
 endfunction
 
 " General utilities, mainly for dealing with user configuration parsing

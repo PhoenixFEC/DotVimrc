@@ -1,5 +1,7 @@
 # DotVimrc (MocOS)
 Borrowing shamelessly from ThinkVim, SpaceVim, vimrc, thanks for them.
+## Requirements
+- Install [vim-plug](https://github.com/junegunn/vim-plug#installation) or [dein](https://github.com/Shougo/dein.vim#requirements)
 ## Install
 	```bash
 	git clone ....

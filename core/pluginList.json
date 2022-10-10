@@ -1,0 +1,25 @@
+[
+  {
+    "pluginManager": ["vim_plug", "dein"],
+    "repo": "glepnir/oceanic-material",
+    "branch": "master",
+    "conf": {
+    }
+  },
+  {
+    "pluginManager": ["vim_plug", "dein"],
+    "repo": "itchyny/lightline.vim",
+    "branch": "master",
+    "conf": {
+      "do": "let g:lightline = {'colorscheme': 'one'}\nset laststatus=2\nset noshowmode;"
+    }
+  },
+  {
+    "pluginManager": ["vim_plug", "dein"],
+    "repo": "junegunn/fzf",
+    "branch": "master",
+    "conf": {
+      "do": "yes | ./install"
+    }
+  }
+]

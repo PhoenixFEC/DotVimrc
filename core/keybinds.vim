@@ -1,3 +1,8 @@
+" <leader>ev edits .vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+" <leader>sv sources .vimrc
+nnoremap <leader>sv :source $MYVIMRC<CR>:redraw<CR>:echo $MYVIMRC 'reloaded'<CR>
+
 " Plugins mapping {{{
 " NERDTree
 nnoremap <C-n> :NERDTree<CR>
@@ -6,11 +11,6 @@ nnoremap <leader>nt :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
 " }}}
-
-" <leader>ev edits .vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC<CR>
-" <leader>sv sources .vimrc
-nnoremap <leader>sv :source $MYVIMRC<CR>:redraw<CR>:echo $MYVIMRC 'reloaded'<CR>
 
 " Buffer {{{
 " buffer navigation
