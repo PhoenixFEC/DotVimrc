@@ -80,7 +80,7 @@ set matchpairs+=<:>  " Add HTML brackets to pair matching
 set matchtime=1  " Tenths of a second to show the matching paren
 
 " set wrapmargin=2
-set textwidth=80
+set textwidth=120
 set linebreak " Break long lines at 'breakat'
 
 " set scrolloff=1

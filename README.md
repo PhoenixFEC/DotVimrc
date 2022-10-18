@@ -20,5 +20,4 @@ Borrowing shamelessly from ThinkVim, SpaceVim, vimrc, thanks for them.
 
 ## Note
 Please backup your ~/.vimrc before install.
-Use `hook_add` property to config Plugin when enabled vim-plug.
 

@@ -2,11 +2,10 @@
 call DotVimrc#utils#source_file($VIM_PATH, 'core/general.vim')
 
 let s:user_vimrc = expand($USER_CONF_DIRECTORY . '/vimrc.vim')
-if filereadable(s:user_vimrc) && readfile(s:user_vimrc)
-	echo "Expand to yourself \"vimrc\"."
-	call DotVimrc#utils#source_file(s:user_vimrc)
+if filereadable(s:user_vimrc)
+	call DotVimrc#utils#source_file($USER_CONF_DIRECTORY, '/vimrc.vim')
+	"  echo "Expand to yourself \"vimrc\"."
 endif
-
 
 "Source plugin configuration-----------------------------
 if has('vim_starting')
@@ -36,7 +35,7 @@ else
   call DotVimrc#plugins#use_vim_plug()
 endif
 
-call DotVimrc#utils#source_file($VIM_PATH, 'core/plugins.vim')
+call DotVimrc#utils#source_file($VIM_PATH, 'core/pluginsConfig.vim')
 call DotVimrc#utils#source_file($VIM_PATH, 'core/keybinds.vim')
 call DotVimrc#utils#source_file($VIM_PATH, 'core/autofixTypos.vim')
 

@@ -2,22 +2,21 @@ scriptencoding utf-8
 
 let $DEIN_CACHE_PATH = $HOME . '/.cache/dein'
 let s:config_paths = get(g:, 'etc_config_paths', [
-  \ $VIM_PATH . '/core/pluginList.json'
+  \ $VIM_PATH . '/core/pluginList.yaml'
   \ ])
 
 " Collection of user plugin list config file-paths
-"  let s:user_plugins = expand($USER_CONF_DIRECTORY . '/plugins.yaml')
-let s:user_plugins = expand($USER_CONF_DIRECTORY . '/plugins.vim')
+let s:user_plugin_config_path = expand($USER_CONF_DIRECTORY . '/plugins.yaml')
 
 " call DotVimrc#utils#generate_coc_json()
 
 function! DotVimrc#plugins#use_vim_plug() abort
-  call s:load_user_plugins(s:user_plugins)
+  call s:load_user_plugins(s:user_plugin_config_path)
 
   let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
   if empty(glob(data_dir . '/autoload/plug.vim'))
     silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    " autocmd VimEnter * PlugInstall --sync | source $VIM_PATH
+    autocmd VimEnter * PlugInstall --sync | source $VIM_PATH
   endif
 
   call plug#begin('~/.vim/plugged')
@@ -34,15 +33,12 @@ function! DotVimrc#plugins#use_vim_plug() abort
   " Plug 'junegunn/vim-easy-align'
   call s:add_plugin(s:config_paths)
 
-  "  test current config path
-  "  echo s:config_paths
-
   " Initialize plugin system
   call plug#end()
 endfunction
 
 function! DotVimrc#plugins#use_dein() abort
-  call s:load_user_plugins(s:user_plugins)
+  call s:load_user_plugins(s:user_plugin_config_path)
 
   if dein#load_state($DEIN_CACHE_PATH)
     " Required:
@@ -76,7 +72,7 @@ function! DotVimrc#plugins#use_dein() abort
 endfunction
 
 function! s:add_plugin(config_paths) abort
-  let l:rc = s:parse_config_files()
+  let l:rc = s:parse_config_files(a:config_paths)
 
   if empty(l:rc)
     call s:error('Empty plugin list')
@@ -86,6 +82,9 @@ function! s:add_plugin(config_paths) abort
   if $VIM_PLUGIN_MANAGER == 'dein'
     for plugin in l:rc
       call dein#add(plugin['repo'], extend(plugin, {}, 'keep'))
+
+      call s:execute_hook(plugin, 'hook_add')
+
       if &runtimepath !~# '/dein.vim'
         set runtimepath+=$DEIN_CACHE_PATH/repos/github.com/Shougo/dein.vim
       elseif &runtimepath !~# plugin['repo']
@@ -97,45 +96,37 @@ function! s:add_plugin(config_paths) abort
     for plugin in l:rc
       "  filter non-vim_plug
       if string(plugin['pluginManager']) !~ 'vim_plug'
-        return
+        continue
       endif
 
       "  Install current plugin
-      if has_key(plugin, 'conf')
-        Plug plugin['repo'], plugin['conf']
-      else
-        Plug plugin['repo']
-      endif
+      call s:install_plugin_with_plug(plugin)
     endfor
   endif
 
   " Add any local plugins
-  " TODO: add plugins in the user configuration directory
   if isdirectory($VIM_PATH . '/plugins')
     if $VIM_PLUGIN_MANAGER == 'dein'
       call dein#local($VIM_PATH . '/plugins', { 'frozen': 1, 'merged': 0 })
     else
       " vim-plug here
-      Plug plugin['repo']
+      "  call s:install_plugin_with_plug(plugin)
     endif
   endif
 endfunction
 
 function! s:load_user_plugins(plugin_files) abort
-    " Filter non-existent config paths
-    call filter(s:config_paths, 'filereadable(v:val)')
-
   " Check the user plugins
   if filereadable(a:plugin_files)
     let content = readfile(a:plugin_files)
     if !empty(content)
-      echo "Expand to yourself \"plugins\" already."
-      call add(s:config_paths,a:plugin_files)
+      call add(s:config_paths, a:plugin_files)
+      echo 'Expand to yourself "plugins" already.'
     endif
   endif
 endfunction
 
-function! s:parse_config_files() abort
+function! s:parse_config_files(config_paths) abort
   let l:merged = []
   try
     " Merge all lists of plugins together
@@ -152,6 +143,22 @@ function! s:parse_config_files() abort
   endtry
 
   return l:merged
+endfunction
+
+function! s:execute_hook(plugin_item, hook)
+  if has_key(a:plugin_item, a:hook)
+    execute a:plugin_item[a:hook]
+  endif
+endfunction
+
+function! s:install_plugin_with_plug(plugin_item) abort
+  if has_key(a:plugin_item, 'conf')
+    Plug a:plugin_item['repo'], a:plugin_item['conf']
+  else
+    Plug a:plugin_item['repo']
+  endif
+
+  call s:execute_hook(a:plugin_item, 'hook_add')
 endfunction
 
 " General utilities, mainly for dealing with user configuration parsing

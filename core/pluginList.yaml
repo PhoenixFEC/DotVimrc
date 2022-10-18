@@ -1,0 +1,92 @@
+# PackageManage{{{
+- repo: Shougo/dein.vim
+  branch: master
+  pluginManager:
+    - dein
+# }}}
+
+# Editor UI{{{
+- repo: glepnir/oceanic-material
+  pluginManager:
+    - vim_plug
+    - dein
+  # hook_add: |
+  #   colorscheme oceanic_material
+  #   set background=dark
+  #   let g:oceanic_material_transparent_background = 1
+  #   let g:oceanic_material_background = 'darker'
+
+- repo: voldikss/vim-floaterm
+  pluginManager:
+    - vim_plug
+    - dein
+
+# - repo: hzchirs/vim-material
+
+## Status Bar
+# - repo: glepnir/spaceline.vim
+- repo: itchyny/lightline.vim
+  pluginManager:
+    - vim_plug
+    - dein
+  # hook_add: |
+  #   let g:lightline = {'colorscheme': 'one'}
+  #   set laststatus=2
+  #   set noshowmode
+
+- repo: preservim/nerdtree
+  pluginManager:
+    - vim_plug
+    - dein
+  # hook_add: |
+  #   let g:NERDTreeDirArrowExpandable = '>'
+  #   let g:NERDTreeDirArrowCollapsible = '-'
+
+- repo: ryanoasis/vim-devicons
+  pluginManager:
+    - vim_plug
+    - dein
+
+- repo: bagrat/vim-buffet
+  pluginManager:
+    - vim_plug
+    - dein
+#}}}
+
+# Edit {{{
+# like vscode <C-d>
+- repo: mg979/vim-visual-multi
+  branch: master
+  pluginManager:
+    - vim_plug
+    - dein
+  conf:
+    branch: master
+
+# }}}
+
+# Search {{{
+# - repo: junegunn/fzf
+#   pluginManager:
+#     - vim_plug
+#     - dein
+#   conf:
+#     do: yes | ./install
+#     dir: ~/.fzf
+#   hook_add: |
+#     set rtp+=~/.fzf
+
+# Install from Homebrew (Mac OS)
+- repo: /usr/local/opt/fzf
+  pluginManager:
+    - vim_plug
+    - dein
+  hook_add: |
+    set rtp+=/usr/local/opt/fzf
+
+
+- repo: junegunn/fzf.vim
+  pluginManager:
+    - vim_plug
+    - dein
+# }}}
