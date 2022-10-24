@@ -100,6 +100,8 @@ set autoindent
 set smartindent
 set copyindent  " copy the previous indentation on autoindenting
 set cindent
+"  set paste
+set pastetoggle=<F5> " Switch the paste mode
 
 set smarttab  " Tab insert blanks according to 'shiftwidth'
 set expandtab

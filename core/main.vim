@@ -9,13 +9,6 @@ endif
 
 "Source plugin configuration-----------------------------
 if has('vim_starting')
-  if $VIM_PLUGIN_MANAGER == 'dein'
-    " Required:
-    if &runtimepath !~# '/dein.vim'
-      set runtimepath+=$DEIN_CACHE_PATH/repos/github.com/Shougo/dein.vim
-    endif
-  endif
-
   " Ensure data directories
   for s:path in [
       \ $DATA_PATH,
@@ -29,13 +22,8 @@ if has('vim_starting')
   endfor
 endif
 
-if $VIM_PLUGIN_MANAGER == 'dein'
-  call DotVimrc#plugins#use_dein()
-else
-  call DotVimrc#plugins#use_vim_plug()
-endif
-
-call DotVimrc#utils#source_file($VIM_PATH, 'core/pluginsConfig.vim')
+call DotVimrc#utils#source_file($VIM_PATH, 'core/plugins/main.vim')
+call DotVimrc#utils#source_file($VIM_PATH, 'core/pluginsConfig/main.vim')
 call DotVimrc#utils#source_file($VIM_PATH, 'core/keybinds.vim')
 call DotVimrc#utils#source_file($VIM_PATH, 'core/autofixTypos.vim')
 

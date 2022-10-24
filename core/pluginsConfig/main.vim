@@ -21,27 +21,30 @@ let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
 
 "  Bottom status bar
 "  ---- itchyny/lightline.vim ----
-let g:lightline = {'colorscheme': 'one'}
-set laststatus=2
-set noshowmode
+"  let g:lightline = {'colorscheme': 'one'}
+"  set laststatus=2
+"  set noshowmode
 
 " ---- preservim/nerdtree ----
-let g:NERDTreeDirArrowExpandable = '>'
-let g:NERDTreeDirArrowCollapsible = '^'
+"  let g:NERDTreeDirArrowExpandable = '>'
+"  let g:NERDTreeDirArrowCollapsible = '^'
 
-" ---- bagrat/vim-buffet ----
+" ---- bagrat/vim-buffet ---- Buffer bar UI
 let g:buffet_show_index = 1
 let g:buffet_powerline_separators = 1
 let g:buffet_tab_icon = "\uf00a"
 let g:buffet_left_trunc_icon = "\uf0a8"
 let g:buffet_right_trunc_icon = "\uf0a9"
 
+" ---- mg979/vim-visual-multi ----
+" Permanent mappings, except <C-n>, can be disabled with:
+"  let g:VM_default_mappings = 0
+" Mouse mappings (also permanent) can be enabled with:
+let g:VM_mouse_mappings = 1
+" change any mapping
+"  let g:VM_maps = {}
+"  let g:VM_maps["Undo"] = 'u'
+"  let g:VM_maps["Redo"] = '<C-r>'
+
 " ---- fzf for vim ----
-set rtp+=/usr/local/opt/fzf
-if exists('$TMUX')
-  " See `man fzf-tmux` for available options
-  let g:fzf_layout = { 'tmux': '-p90%,60%' }
-else
-  let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.6, 'relative': v:true } }
-endif
-let g:fzf_history_dir = '~/.local/share/fzf-history'
+call DotVimrc#utils#source_file(fnamemodify(resolve(expand('<sfile>')), ':h'), '/fzf.vim')
