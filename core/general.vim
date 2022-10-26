@@ -8,22 +8,15 @@
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General---------
-set autochdir " Change current work directory automatically
+scriptencoding utf-8
+set encoding=utf-8
 
 if exists("+shellslash")
   set shellslash " expand filenames with forward slash
 endif
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader=","
-let maplocalleader=","
-
-set errorbells
-set visualbell " Use visual bell instead of beeping
-
-" Don't redraw while executing macros (good performance config)
-set lazyredraw
+set autochdir " Change current work directory automatically
+set secure
 
 " Windows {{{
 if has("vertsplit")
@@ -57,6 +50,16 @@ set relativenumber
 
 set ffs=unix,dos,mac " Use Unix as the standard file type
 
+set viewoptions=folds,options,cursor,curdir,slash,unix
+" set inccommand=split
+set completeopt=longest,noinsert,menuone,noselect,preview
+
+set errorbells
+set visualbell " Use visual bell instead of beeping
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+
 " Cursor {{{
 " set cursorline  " Highline current line
 " hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
@@ -68,8 +71,6 @@ set ruler  " Show cursor row-col number
 set display+=lastline
 set laststatus=2  " Show status. 0 -> Hidden, 1 -> When multi-window, 2 -> Show Always
 
-set nowrap
-
 set showcmd
 set cmdheight=1 " Height of the command bar
 
@@ -79,6 +80,7 @@ set showmatch
 set matchpairs+=<:>  " Add HTML brackets to pair matching
 set matchtime=1  " Tenths of a second to show the matching paren
 
+set wrap
 " set wrapmargin=2
 set textwidth=120
 set linebreak " Break long lines at 'breakat'
@@ -101,7 +103,7 @@ set smartindent
 set copyindent  " copy the previous indentation on autoindenting
 set cindent
 "  set paste
-set pastetoggle=<F5> " Switch the paste mode
+set pastetoggle=<F5> " Switch the paste mode, no number to copy
 
 set smarttab  " Tab insert blanks according to 'shiftwidth'
 set expandtab
@@ -111,7 +113,7 @@ set shiftwidth=4
 set shiftround  " use multiple of shiftwidth when indenting with '<' and '>'
 " }}}
 
-" Coding---------
+" Edit---------
 " Fold operation {{{
 if has("folding")
   set foldenable        " enable folding
@@ -119,8 +121,8 @@ if has("folding")
   set foldlevelstart=99 " start editing with all folds open
 
   " toggle folds
-  " nnoremap <Space> za
-  " vnoremap <Space> za
+  nnoremap <Space> za
+  vnoremap <Space> za
 
   set foldtext=FoldText()
   function! FoldText()
@@ -158,20 +160,21 @@ if has("folding")
     return l:text . repeat(' ', l:width - strlen(substitute(l:text, ".", "x", "g"))) . l:info
   endfunction
 endif
-
-set formatoptions-=t  " don't auto-wrap text using textwidth
-set formatoptions+=c  " auto-wrap comments using textwidth
-set formatoptions+=r  " auto-insert current comment leader,  C-u to undo
 " }}}
 
 " Buffer--------
 set spelllang=en  " English only
 set nospell       " disabled by default
 
+set formatoptions-=t  " don't auto-wrap text using textwidth
+set formatoptions+=c  " auto-wrap comments using textwidth
+set formatoptions+=r  " auto-insert current comment leader,  C-u to undo
+
 set switchbuf=usetab  " switch to existing tab then window when switching buffer
 set autoread  " Automatically read a file changed outside of vim
 
 set nobomb
+set list
 set listchars=tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶
 set fillchars=vert:│,fold:·
 
@@ -198,9 +201,9 @@ set undofile
 set undolevels=1000
 " set noswapfile
 let g:data_dir=$DATA_PATH
-let g:backup_dir=g:data_dir.'/backup//'
-let g:swap_dir=g:data_dir.'swap//'
-let g:undo_dir=g:data_dir.'undofile//'
+let g:backup_dir=g:data_dir.'/tmp/backup/'
+let g:swap_dir=g:data_dir.'/tmp/swap/'
+let g:undo_dir=g:data_dir.'/tmp/undofile/'
 if finddir(g:data_dir) ==# ''
   silent call mkdir(g:data_dir, 'p', 0700)
 endif

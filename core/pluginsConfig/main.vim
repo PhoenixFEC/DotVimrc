@@ -48,3 +48,7 @@ let g:VM_mouse_mappings = 1
 
 " ---- fzf for vim ----
 call DotVimrc#utils#source_file(fnamemodify(resolve(expand('<sfile>')), ':h'), '/fzf.vim')
+
+" ---- coc ----
+call DotVimrc#utils#source_file(fnamemodify(resolve(expand('<sfile>')), ':h'), '/coc.vim')
+
