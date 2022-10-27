@@ -9,8 +9,8 @@ Please backup your ~/.vimrc before install.
 
 ## Install
   ```bash
-  git clone --depth=1 https://github.com/PhoenixFEC/CDotVimrc.git ~/tmp/CDotVimrc
-  cd ~/tmp/CDotVimrc
+  git clone --depth=1 https://github.com/PhoenixFEC/CDotVimrc.git ~/.DotVimrc
+  cd ~/.DotVimrc
   # plug manager with dein.vim
   # sh generate_vimrc.sh dein
   # or use vim-plug (default)

@@ -39,12 +39,13 @@ set redrawtime=1500  " Time in milliseconds for stopping display redraw
 
 " Appearance--------
 set background=dark
-set term=xterm
+"set term=xterm
 set termguicolors  " Enable true color
 "  set t_Co=256  " Enable colour 256
 if !has('gui_running')
   set t_Co=256
 endif
+
 set number  " Enable line number
 set relativenumber
 
