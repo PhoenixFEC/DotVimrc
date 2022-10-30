@@ -79,13 +79,13 @@ fetch_repo() {
     info "Trying to update ${DotVimrc: 1}"
     cd "$HOME/${DotVimrc}"
     git checkout -- .
-    git pull --prune
+    git pull --prune --rebase
     cd - > /dev/null 2>&1
     success "Successfully update ${DotVimrc: 1}"
   else
     info "Trying to clone ${DotVimrc: 1}"
-    git clone https://github.com/PhoenixFEC/${DotVimrc: 1}.git "$HOME/${DotVimrc}"
-    # git clone ~/MyProjects/${DotVimrc: 1} "$HOME/${DotVimrc}"
+    # git clone https://github.com/PhoenixFEC/${DotVimrc: 1}.git "$HOME/${DotVimrc}"
+    git clone ~/MyProjects/${DotVimrc: 1} "$HOME/${DotVimrc}"
     if [ $? -eq 0 ]; then
       write_to_conf
       # config Git Credential to cache(900s)
@@ -189,11 +189,25 @@ uninstall_neovim() {
 
 # install_done {{{
 install_done() {
+  case $1 in
+    'vim')
+      thename='Vim'
+    ;;
+
+    'neovim')
+      thename='Neovim'
+    ;;
+
+    *)
+      thename='Vim or Neovim'
+    ;;
+  esac
+
   echo_with_color ${blue} ""
   echo_with_color ${blue} "=    ✌︎︎ Almost done!"
   echo_with_color ${blue} "============================================================================="
   echo_with_color ${blue} "=    ${THIS_TIME} - ${DotVimrc: 1} V${VERSION}"
-  echo_with_color ${blue} "=    Open Vim or Neovim and it will install the plugins automatically"
+  echo_with_color ${blue} "=    Open ${thename} and it will install the plugins automatically"
   echo_with_color ${blue} "============================================================================="
   echo_with_color ${blue} "=    ☕️ Enjoy it."
   echo_with_color ${blue} ""
@@ -278,7 +292,7 @@ main() {
           esac
         fi
 
-        install_done
+        install_done $2
 
         exit 0
       ;;
@@ -311,7 +325,7 @@ main() {
     fetch_repo ${VIM_PLUGIN_MANAGER}
     install_vim
     install_neovim
-    install_done
+    install_done 'all'
   fi
 }
 #}}}

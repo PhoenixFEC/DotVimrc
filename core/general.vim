@@ -55,8 +55,10 @@ set viewoptions=folds,options,cursor,curdir,slash,unix
 " set inccommand=split
 set completeopt=longest,noinsert,menuone,noselect,preview
 
-set errorbells
+set noerrorbells
 set visualbell " Use visual bell instead of beeping
+set t_vb= " it will no beep and no flash Vim's screen
+"  set belloff=all
 
 " Don't redraw while executing macros (good performance config)
 set lazyredraw

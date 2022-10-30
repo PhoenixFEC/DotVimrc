@@ -20,8 +20,10 @@ Plug 'glepnir/oceanic-material'
 
 "  Plug 'preservim/nerdtree'
 " Treesitter
+if has('nvim')
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/playground'
+endif
 
 " Status line
 Plug 'theniceboy/eleline.vim', { 'branch': 'no-scrollbar' }
@@ -37,21 +39,27 @@ Plug 'theniceboy/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
 "Plug 'mhinz/vim-signify'
 Plug 'airblade/vim-gitgutter'
 Plug 'cohama/agit.vim'
+if has('nvim')
 Plug 'kdheepak/lazygit.nvim'
+endif
 
 " Undo Tree
 Plug 'mbbill/undotree'
 
 " Auto Complete
+if has('nvim')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': 'v0.0.79'}
+endif
 Plug 'wellle/tmux-complete.vim'
 
 " File navigation
-Plug 'ibhagwan/fzf-lua'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+if has('nvim')
+Plug 'ibhagwan/fzf-lua'
 Plug 'kevinhwang91/rnvimr'
+endif
 Plug 'airblade/vim-rooter'
 Plug 'pechorin/any-jump.vim'
 "  Plug 'voldikss/vim-floaterm'
@@ -91,9 +99,11 @@ Plug 'wlangstroth/vim-racket'
 " Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
 
 " Editor Enhancement
+if has('nvim')
 Plug 'petertriho/nvim-scrollbar'
 Plug 'kevinhwang91/nvim-hlslens'
 Plug 'ggandor/lightspeed.nvim'
+endif
 "Plug 'Raimondi/delimitMate'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mg979/vim-visual-multi'
@@ -121,8 +131,10 @@ Plug 'junegunn/goyo.vim'
 Plug 'reedes/vim-wordy'
 
 " Find & Replace
+if has('nvim')
 Plug 'nvim-lua/plenary.nvim' " nvim-spectre dep
 Plug 'nvim-pack/nvim-spectre'
+endif
 
 " Other visual enhancement
 "  Plug 'luochen1990/rainbow'
@@ -130,7 +142,9 @@ Plug 'nvim-pack/nvim-spectre'
 Plug 'bagrat/vim-buffet'
 Plug 'ryanoasis/vim-devicons'
 Plug 'wincent/terminus'
+if has('nvim')
 Plug 'kyazdani42/nvim-web-devicons'
+endif
 
 " Other useful utilities
 Plug 'lambdalisue/suda.vim' " do stuff like :sudowrite

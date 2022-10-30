@@ -8,6 +8,7 @@ let g:vim_path = $VIM_PATH
 let g:dotvimrc_dir = '.DotVimrc'
 " Set user configuration directory
 let $USER_CONF_DIRECTORY = $HOME . '/' . g:dotvimrc_dir . '.d'
+let $MYVIMRC = $USER_CONF_DIRECTORY . '/vimrc'
 
 " Set data/cache directory as $XDG_CACHE_HOME/vim
 let $DATA_PATH = expand('~/.cache' . '/DotVimrc')
