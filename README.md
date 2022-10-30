@@ -12,11 +12,14 @@ Please backup your ~/.vimrc before install.
   git clone --depth=1 https://github.com/PhoenixFEC/CDotVimrc.git ~/.DotVimrc
   cd ~/.DotVimrc
   # plug manager with dein.vim
-  # sh generate_vimrc.sh dein
-  # or use vim-plug (default)
-  sh generate_vimrc.sh
-  # If the `generate_vimrc.sh` has not "x" permission, you must execute below command first:
-  # chmod u+x generate_vimrc.sh
+  # sh install.sh --install all --plugin-manager dein
+  # or use vim-plug (default), install both Vim and Neovim configurations with the below:
+  sh install.sh
+  # If the `install.sh` has not "x" permission, you must execute below command first:
+  # chmod u+x install.sh
+
+  # for help:
+  sh install.sh --help
   ```
 
 ## User configuration
