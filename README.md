@@ -2,7 +2,7 @@
 Personal Vim configuration.
 
 ## Requirements
-- Install [vim-plug](https://github.com/junegunn/vim-plug#installation) or [dein](https://github.com/Shougo/dein.vim#requirements)
+- ~~Install [vim-plug](https://github.com/junegunn/vim-plug#installation) or [dein](https://github.com/Shougo/dein.vim#requirements)~~
 
 ## Note
 Please backup your ~/.vimrc before install.
@@ -30,4 +30,4 @@ Please backup your ~/.vimrc before install.
 ```
 
 ## Thanks
-Borrowing shamelessly from [ThinkVim](https://github.com/imxiejie/ThinkVim), [SpaceVim](https://github.com/SpaceVim/SpaceVim), [vimrc](https://github.com/amix/vimrc), thank them for open source.
+Borrowing shamelessly from [ThinkVim](https://github.com/imxiejie/ThinkVim), [SpaceVim](https://github.com/SpaceVim/SpaceVim), [vimrc](https://github.com/amix/vimrc), [theniceboy/nvim](https://github.com/theniceboy/nvim), thank them for open source.

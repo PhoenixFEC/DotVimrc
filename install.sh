@@ -90,6 +90,7 @@ fetch_repo() {
       write_to_conf
       # config Git Credential to cache(900s)
       git config --global credential.helper cache
+      # git config --global http.version HTTP/1.1
       success "Successfully clone ${DotVimrc: 1}"
     else
       error "Failed to clone ${DotVimrc: 1}"

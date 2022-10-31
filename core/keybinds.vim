@@ -1,5 +1,3 @@
-let mapleader="<space>"
-
 " <leader>ev edits .vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 " <leader>sv sources .vimrc

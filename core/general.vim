@@ -51,7 +51,6 @@ set relativenumber
 
 set ffs=unix,dos,mac " Use Unix as the standard file type
 
-set viewoptions=folds,options,cursor,curdir,slash,unix
 " set inccommand=split
 set completeopt=longest,noinsert,menuone,noselect,preview
 
@@ -120,12 +119,9 @@ set shiftround  " use multiple of shiftwidth when indenting with '<' and '>'
 " Fold operation {{{
 if has("folding")
   set foldenable        " enable folding
-  set foldmethod=syntax " fold based on syntax highlighting
+  "  set foldmethod=syntax " fold based on syntax highlighting
+  set foldmethod=indent
   set foldlevelstart=99 " start editing with all folds open
-
-  " toggle folds
-  nnoremap <Space> za
-  vnoremap <Space> za
 
   set foldtext=FoldText()
   function! FoldText()
@@ -177,6 +173,8 @@ set switchbuf=usetab  " switch to existing tab then window when switching buffer
 set autoread  " Automatically read a file changed outside of vim
 
 set nobomb
+set viewoptions=folds,options,cursor,curdir,slash,unix
+set conceallevel=2
 set list
 set listchars=tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶
 set fillchars=vert:│,fold:·
