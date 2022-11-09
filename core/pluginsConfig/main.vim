@@ -56,12 +56,49 @@ let g:bullets_enabled_file_types = [
     \]
 
 " ---- kevinhwang91/rnvimr ----
-let g:rnvimr_ex_enable = 1
-let g:rnvimr_pick_enable = 1
+" Make Ranger replace Netrw and be the file explorer
+let g:rnvimr_enable_ex = 1
+
+" Make Ranger to be hidden after picking a file
+let g:rnvimr_enable_picker = 1
+
+" Replace `$EDITOR` candidate with this command to open the selected file
+let g:rnvimr_edit_cmd = 'drop'
+
+" Disable a border for floating window
 let g:rnvimr_draw_border = 0
-" let g:rnvimr_bw_enable = 1
+
+" Hide the files included in gitignore
+let g:rnvimr_hide_gitignore = 1
+
+" Change the border's color
+let g:rnvimr_border_attr = {'fg': 14, 'bg': -1}
+
+" Make Neovim wipe the buffers corresponding to the files deleted by Ranger
+let g:rnvimr_enable_bw = 1
+
+" Add a shadow window, value is equal to 100 will disable shadow
+let g:rnvimr_shadow_winblend = 70
+
+" Draw border with both
+let g:rnvimr_ranger_cmd = ['ranger', '--cmd=set draw_borders both']
+
+" Link CursorLine into RnvimrNormal highlight in the Floating window
 highlight link RnvimrNormal CursorLine
-nnoremap <silent> R :RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
+
+nnoremap <silent> <M-o> :RnvimrToggle<CR>
+tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
+
+" Resize floating window by all preset layouts
+tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
+
+" Resize floating window by special preset layouts
+tnoremap <silent> <M-l> <C-\><C-n>:RnvimrResize 1,8,9,11,5<CR>
+
+" Resize floating window by single preset layout
+tnoremap <silent> <M-y> <C-\><C-n>:RnvimrResize 6<CR>
+
+" Map Rnvimr action
 let g:rnvimr_action = {
             \ '<C-t>': 'NvimEdit tabedit',
             \ '<C-x>': 'NvimEdit split',
@@ -69,13 +106,43 @@ let g:rnvimr_action = {
             \ 'gw': 'JumpNvimCwd',
             \ 'yw': 'EmitRangerCwd'
             \ }
-let g:rnvimr_layout = { 'relative': 'editor',
-            \ 'width': &columns,
-            \ 'height': &lines,
-            \ 'col': 0,
-            \ 'row': 0,
-            \ 'style': 'minimal' }
-let g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
+
+" Add views for Ranger to adapt the size of floating window
+let g:rnvimr_ranger_views = [
+            \ {'minwidth': 90, 'ratio': []},
+            \ {'minwidth': 50, 'maxwidth': 89, 'ratio': [1,1]},
+            \ {'maxwidth': 49, 'ratio': [1]}
+            \ ]
+
+" Customize the initial layout
+let g:rnvimr_layout = {
+            \ 'relative': 'editor',
+            \ 'width': float2nr(round(0.7 * &columns)),
+            \ 'height': float2nr(round(0.7 * &lines)),
+            \ 'col': float2nr(round(0.15 * &columns)),
+            \ 'row': float2nr(round(0.15 * &lines)),
+            \ 'style': 'minimal'
+            \ }
+
+" Customize multiple preset layouts
+" '{}' represents the initial layout
+let g:rnvimr_presets = [
+  \ {'width': 0.800, 'height': 0.800}
+  \ ]
+
+" Fullscreen for initial layout
+" let g:rnvimr_layout = {
+"            \ 'relative': 'editor',
+"            \ 'width': &columns,
+"            \ 'height': &lines - 2,
+"            \ 'col': 0,
+"            \ 'row': 0,
+"            \ 'style': 'minimal'
+"            \ }
+"
+" Only use initial preset layout
+" let g:rnvimr_presets = [{}]
+
 
 
 "  ---- pechorin/any-jump.vim ----
@@ -234,6 +301,8 @@ nmap <expr> f reg_recording() . reg_executing() == "" ? "<Plug>Lightspeed_f" : "
 nmap <expr> F reg_recording() . reg_executing() == "" ? "<Plug>Lightspeed_F" : "F"
 nmap <expr> t reg_recording() . reg_executing() == "" ? "<Plug>Lightspeed_t" : "t"
 nmap <expr> T reg_recording() . reg_executing() == "" ? "<Plug>Lightspeed_T" : "T"
+"  s: for replacing one character, r is the adequate choice;
+"      for the rare case when one wants to continue inserting after that, using cl is more than fine
 " autocmd BufEnter * map <buffer> <nowait> { <Plug>Lightspeed_S
 map <nowait> " <Plug>Lightspeed_omni_s
 if g:nvim_plugins_installation_completed == 1
@@ -249,7 +318,7 @@ require'lightspeed'.setup {
   -- substitute_chars = { ['\r'] = '¬', },
   -- -- Leaving the appropriate list empty effectively disables "smart" mode,
   -- -- and forces auto-jump to be on or off.
-  safe_labels= {"a", "r", "s", "t", "n", "e", "i", "o", "w", "f", "u", "y", "x", 'c', "v", "k", "m"},
+  safe_labels= {"a", "r", "s", "t", "n", "e", "i", "o", "w", "f", "u", "y", "x", "c", "v", "k", "m"},
   -- labels = {},
   special_keys = {
     next_match_group = '<space>',
@@ -297,3 +366,6 @@ call DotVimrc#utils#source_file(fnamemodify(resolve(expand('<sfile>')), ':h'), '
 
 " ---- status line ----
 call DotVimrc#utils#source_file(fnamemodify(resolve(expand('<sfile>')), ':h'), '/status_line.vim')
+
+" ---- sidebar ----
+call DotVimrc#utils#source_file(fnamemodify(resolve(expand('<sfile>')), ':h'), '/sidebar.vim')

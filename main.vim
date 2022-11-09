@@ -9,20 +9,21 @@ let g:dotvimrc_dir = '.DotVimrc'
 " Set user configuration directory
 let $USER_CONF_DIRECTORY = $HOME . '/' . g:dotvimrc_dir . '.d'
 
-if has('nvim')
-  let s:entry_rc = 'init.vim'
-else
-  let s:entry_rc = 'vimrc'
-endif
-let $MYVIMRC = $USER_CONF_DIRECTORY . '/' . s:entry_rc
-
 " Set data/cache directory as $XDG_CACHE_HOME/vim
 let $DATA_PATH = expand('~/.cache' . '/DotVimrc')
+let g:data_dir = $DATA_PATH
+
+if has('nvim')
+  let g:entry_rc = 'init.vim'
+else
+  let g:entry_rc = 'vimrc'
+endif
+let $MYVIMRC = $USER_CONF_DIRECTORY . '/' . g:entry_rc
 
 if has('vim_starting')
   " When using viminit trick for exotic myvimrc locations, add path now.
-  if &runtimepath !~# $VIM_PATH
-    set runtimepath+=$VIM_PATH
+  if &runtimepath !~# g:vim_path
+    set runtimepath+=g:vim_path
   endif
 
   if &compatible

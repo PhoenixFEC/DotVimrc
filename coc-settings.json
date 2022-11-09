@@ -174,7 +174,7 @@
     "f": "search",
     "F": "searchRecursive",
 
-    "gk": "gotoParent",
+    "gp": "gotoParent",
     "gf": "gotoSource:file",
     "gb": "gotoSource:buffer",
 

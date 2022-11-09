@@ -1,18 +1,15 @@
 " <leader>ev edits .vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
-" <leader>sv sources .vimrc
-nnoremap <leader>sv :source $MYVIMRC<CR>:redraw<CR>:echo $MYVIMRC 'reloaded'<CR>
 
-" Plugins mapping {{{
-" NERDTree
-"  nnoremap <leader>nt :NERDTree<CR>
-"  nnoremap <C-f> :NERDTreeFind<CR>
-"  nnoremap <leader>ntf :NERDTreeFocus<CR>
-"  nnoremap <leader>ntt :NERDTreeToggle<CR>
-
-" vim-floaterm
-let g:floaterm_keymap_new = '<Leader>ft'
-" }}}
+"  TODO: source conf
+" <leader>sgv to source global vimrc
+"  if has('nvim')
+"  nnoremap <leader>sgv :source! $VIM_PATH/init.vim<CR>:redraw<CR>:echo $VIM_PATH/init.vim 'reloaded'<CR>
+"  else
+"  nnoremap <leader>sgv :source! $VIM_PATH/vimrc<CR>:redraw<CR>:echo $VIM_PATH/vimrc 'reloaded'<CR>
+"  endif
+"  " <leader>sv source user's .vimrc
+"  nnoremap <leader>sv :source! $MYVIMRC<CR>:redraw<CR>:echo $MYVIMRC 'reloaded'<CR>
 
 " Buffer {{{
 " vim-buffet mappings
@@ -25,7 +22,7 @@ noremap <leader>6 <Plug>BuffetSwitch(6)
 noremap <leader>7 <Plug>BuffetSwitch(7)
 noremap <leader>8 <Plug>BuffetSwitch(8)
 noremap <leader>9 <Plug>BuffetSwitch(9)
-noremap <leader>0 <Plug>BuffetSwitch(10)
+"  noremap <leader>0 <Plug>BuffetSwitch(10)
 " buffer navigation
 noremap <Tab> :bn<CR>
 noremap <S-Tab> :bp<CR>
@@ -42,19 +39,30 @@ noremap <silent> <leader>Y "+Y
 noremap <silent> <leader>p "+p
 noremap <silent> <leader>P "+P
 
-" reselect last selection after indent / un-indent in visual and select modes
-vnoremap < <gv
-vnoremap > >gv
-vnoremap <Tab> >
-vnoremap <S-Tab> <
+" Select blocks after indenting
+xnoremap < <gv
+xnoremap > >gv|
 
-" <leader>w writes the whole buffer to the current file
-nnoremap <silent> <leader>w :w!<CR>
-inoremap <silent> <leader>w <ESC>:w!<CR>
+" Use tab for indenting in visual mode
+xnoremap <Tab> >gv|
+xnoremap <S-Tab> <gv
+nnoremap > >>_
+nnoremap < <<_
 
-" <leader>W writes all buffers
-nnoremap <silent> <leader>W :wa!<CR>
-inoremap <silent> <leader>W <ESC>:wa!<CR>
+" move cursor wihout leaving insert mode
+try
+  redir => s:backspace
+  silent! execute 'set ' 't_kb?'
+  redir END
+  if s:backspace !~ '\^H'
+    inoremap <C-h> <C-o>h
+    inoremap <C-j> <C-o>j
+    inoremap <C-k> <C-o>k
+    inoremap <C-l> <C-o>l
+  endif
+finally
+  redir END
+endtry
 
 " move to the position where the last change was made
 noremap gI `.
@@ -69,6 +77,16 @@ nnoremap <silent> <leader>hlw :setl hls<CR>:let @/="\\<<C-r><C-w>\\>"<CR>
 nnoremap <silent> <leader>hl1 :highlight Highlight1 ctermfg=0 ctermbg=226 guifg=Black guibg=Yellow<CR> :execute 'match Highlight1 /\<<C-r><C-w>\>/'<cr>
 nnoremap <silent> <leader>hl2 :highlight Highlight2 ctermfg=0 ctermbg=51 guifg=Black guibg=Cyan<CR> :execute '2match Highlight2 /\<<C-r><C-w>\>/'<cr>
 nnoremap <silent> <leader>hl3 :highlight Highlight3 ctermfg=0 ctermbg=46 guifg=Black guibg=Green<CR> :execute '3match Highlight3 /\<<C-r><C-w>\>/'<cr>
+
+" <leader>w writes the whole buffer to the current file
+"nnoremap <silent> <leader>w :w!<CR>
+"inoremap <silent> <leader>w <ESC>:w!<CR>
+nnoremap <silent> <D-s> :w!<CR>
+inoremap <silent> <D-s> <ESC>:w!<CR>
+
+" <leader>W writes all buffers
+nnoremap <silent> <leader>W :wa!<CR>
+inoremap <silent> <leader>W <ESC>:wa!<CR>
 
 " }}}
 
@@ -98,23 +116,20 @@ nnoremap <silent> <leader>q :q<CR>
 inoremap <silent> <leader>q <ESC>:q<CR>
 " }}}
 
-" Cursor
-" move cursor wihout leaving insert mode
-try
-  redir => s:backspace
-  silent! execute 'set ' 't_kb?'
-  redir END
-  if s:backspace !~ '\^H'
-    inoremap <C-h> <C-o>h
-    inoremap <C-j> <C-o>j
-    inoremap <C-k> <C-o>k
-    inoremap <C-l> <C-o>l
-  endif
-finally
-  redir END
-endtry
-
+"  Command Line {{{
 " CTRL+A moves to start of line in command mode
 cnoremap <C-a> <home>
 " CTRL+E moves to end of line in command mode
 cnoremap <C-e> <end>
+"  }}}
+
+" Plugins mapping {{{
+" preservim/nerdtree
+nnoremap <leader>nt :NERDTree<CR>
+nnoremap <leader>ntff :NERDTreeFind<CR>
+nnoremap <leader>ntf :NERDTreeFocus<CR>
+nnoremap <leader>ntt :NERDTreeToggle<CR>
+
+" vim-floaterm
+"  let g:floaterm_keymap_new = '<Leader>ft'
+" }}}

@@ -6,7 +6,7 @@ if exists('$TMUX')
   " See `man fzf-tmux` for available options
   let g:fzf_layout = { 'tmux': '-p90%,60%' }
 else
-  let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.6, 'relative': v:true } }
+  let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.6, 'relative': v:true } }
 endif
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
@@ -37,20 +37,22 @@ command! -bang -nargs=* GGrep
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
 """ ripgrep
-"  function! RipgrepFzf(query, fullscreen)
-"    let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
-"    let initial_command = printf(command_fmt, shellescape(a:query))
-"    let reload_command = printf(command_fmt, '{q}')
-"    let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-"    call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-"  endfunction
-"  command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 """ preview with bat
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>,
-  \   fzf#vim#with_preview({'options': ['--info', 'inline', '--bind', 'ctrl-/:change-preview-window(right,70%,40%,hidden|right)']}),
+  \   fzf#vim#with_preview({'options': ['--info', 'inline', '--bind', 'ctrl-/:change-preview-window(right,80%,60%,hidden|right)']}),
   \   <bang>0)
+
+command! -bang ProjectFiles caibhagwan/fzf-luall fzf#vim#files(<q-args>, <bang>0)
 
 "  --- voldikss/vim-floaterm ---
 hi FloatermBorder guibg=orange
@@ -58,19 +60,21 @@ hi FloatermBorder guibg=orange
 " --- ibhagwan/fzf-lua ---
 "  nnoremap <c-P> <cmd>lua require('fzf-lua').files()<CR>
 noremap <silent> <C-p> :FzfLua files<CR>
-noremap <silent> <C-f> :Rg<CR>
+noremap <silent> <C-f> :RG<CR>
 noremap <silent> <C-h> :FzfLua oldfiles cwd=~<CR>
-noremap <silent> <C-q> :FzfLua builtin<CR>
-noremap <silent> <C-t> :FzfLua lines<CR>
+"  noremap <silent> <C-q> :FzfLua builtin<CR>
+"  noremap <silent> <C-t> :FzfLua lines<CR>
 " noremap <silent> <C-x> :FzfLua resume<CR>
-noremap <silent> z= :FzfLua spell_suggest<CR>
+"  noremap <silent> z= :FzfLua spell_suggest<CR>
 noremap <silent> <C-w> :FzfLua buffers<CR>
-noremap <leader>; :History:<CR>
+"  noremap <leader>; :History:<CR>
+
 augroup fzf_commands
   autocmd!
   autocmd FileType fzf tnoremap <silent> <buffer> <c-j> <down>
   autocmd FileType fzf tnoremap <silent> <buffer> <c-k> <up>
 augroup end
+
 if g:nvim_plugins_installation_completed == 1
 lua <<EOF
 require'fzf-lua'.setup {
@@ -173,3 +177,36 @@ require'fzf-lua'.setup {
 }
 EOF
 endif
+
+" ---- Yggdroot/LeaderF ----
+"  " don't show the help in normal mode
+"  let g:Lf_HideHelp = 1
+"  let g:Lf_UseCache = 0
+"  let g:Lf_UseVersionControlTool = 0
+"  let g:Lf_IgnoreCurrentBufferName = 1
+"  " popup mode
+"  let g:Lf_WindowPosition = 'popup'
+"  let g:Lf_PreviewInPopup = 1
+"  let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu Sans Mono for Powerline" }
+"  let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
+
+"  let g:Lf_ShortcutF = "<leader>ff"
+"  noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+"  noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+"  noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+"  noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+
+"  noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
+"  noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+"  " search visually selected text literally
+"  xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+"  noremap go :<C-U>Leaderf! rg --recall<CR>
+
+"  " should use `Leaderf gtags --update` first
+"  let g:Lf_GtagsAutoGenerate = 0
+"  let g:Lf_Gtagslabel = 'native-pygments'
+"  noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+"  noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+"  noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+"  noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
+"  noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>

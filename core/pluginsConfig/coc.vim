@@ -1,10 +1,10 @@
 " --- neoclide/coc.nvim ---
+	" \ 'coc-explorer',
 let g:coc_global_extensions = [
 	\ 'coc-css',
 	\ 'coc-diagnostic',
 	\ 'coc-docker',
 	\ 'coc-eslint',
-	\ 'coc-explorer',
 	\ 'coc-flutter-tools',
 	\ 'coc-gitignore',
 	\ 'coc-html',
@@ -85,14 +85,14 @@ xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
 " Useful commands
-nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
+"nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gD :tab sp<CR><Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 " nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <leader>rn <Plug>(coc-rename)
-nmap <space>e :CocCommand explorer<CR>
+"nmap <leader>rn <Plug>(coc-rename)
+"nmap <leader>e :CocCommand explorer<CR>
 "  Reveal to current buffer for closest coc-explorer
 nmap <Leader>er <Cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
 
@@ -104,12 +104,15 @@ function! s:cocActionsOpenFromSelected(type) abort
 endfunction
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>aw  <Plug>(coc-codeaction-selected)w
+
 " coctodolist
 " nnoremap <leader>tn :CocCommand todolist.create<CR>
 " nnoremap <leader>tl :CocList todolist<CR>
 " nnoremap <leader>tu :CocCommand todolist.download<CR>:CocCommand todolist.upload<CR>
+
 " coc-tasks
 noremap <silent> <leader>ts :CocList tasks<CR>
+
 " coc-snippets
 imap <C-l> <Plug>(coc-snippets-expand)
 vmap <C-e> <Plug>(coc-snippets-select)

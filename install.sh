@@ -37,9 +37,10 @@ echo_with_color() {
 
 # write_to_conf {{{
 write_to_conf() {
+  success "$1 is already"
   # Trying to define ENV '$VIM_PLUGIN_MANAGER'
   sed -i "" "4a \\
-let \$VIM_PLUGIN_MANAGER = '${VIM_PLUGIN_MANAGER}'\\
+let \$VIM_PLUGIN_MANAGER = '$1'\\
 " "$HOME/${DotVimrc}/main.vim"
 }
 #}}}
@@ -87,7 +88,6 @@ fetch_repo() {
     # git clone https://github.com/PhoenixFEC/${DotVimrc: 1}.git "$HOME/${DotVimrc}"
     git clone ~/MyProjects/${DotVimrc: 1} "$HOME/${DotVimrc}"
     if [ $? -eq 0 ]; then
-      write_to_conf
       # config Git Credential to cache(900s)
       git config --global credential.helper cache
       # git config --global http.version HTTP/1.1
@@ -96,6 +96,12 @@ fetch_repo() {
       error "Failed to clone ${DotVimrc: 1}"
       exit 0
     fi
+  fi
+
+  if [[ $# == 1 && $1 == 'dein' ]]; then
+    write_to_conf 'dein'
+  else
+    write_to_conf 'vim-plug'
   fi
 
   # vim-plug repo
@@ -268,10 +274,10 @@ main() {
     esac
 
     case $1 in
-      -tt)
-        # write_to_conf
-        exit 0
-      ;;
+      #-tt)
+      #  write_to_conf ${VIM_PLUGIN_MANAGER}
+      #  exit 0
+      #;;
 
       --install|-i)
         fetch_repo ${VIM_PLUGIN_MANAGER}
@@ -323,7 +329,7 @@ main() {
 
   else
     # install both Vim and Neovim
-    fetch_repo ${VIM_PLUGIN_MANAGER}
+    fetch_repo 'vim-plug'
     install_vim
     install_neovim
     install_done 'all'

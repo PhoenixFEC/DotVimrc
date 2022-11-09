@@ -22,31 +22,50 @@ call plug#begin(s:data_dir . '/plugged')
 " Plug 'glepnir/oceanic-material'
 Plug 'joshdick/onedark.vim'
 
-" Plug 'preservim/nerdtree'
+" Status line
+if has('nvim')
+Plug 'nvim-lualine/lualine.nvim'
+endif
+"  Plug 'theniceboy/eleline.vim', { 'branch': 'no-scrollbar' }
+"  Plug 'itchyny/lightline.vim'
+
 " Treesitter
 if has('nvim')
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 endif
 
-" Status line
-Plug 'nvim-lualine/lualine.nvim'
-"  Plug 'theniceboy/eleline.vim', { 'branch': 'no-scrollbar' }
-"  Plug 'itchyny/lightline.vim'
-
 " General Highlighter
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'rrethy/vim-illuminate'
 
+" File navigation
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+if has('nvim')
+Plug 'ibhagwan/fzf-lua'
+Plug 'kevinhwang91/rnvimr'
+endif
+"  Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+Plug 'airblade/vim-rooter'
+Plug 'pechorin/any-jump.vim'
+
+" Search & Replace
+if has('nvim')
+Plug 'nvim-lua/plenary.nvim' " nvim-spectre dep
+Plug 'nvim-pack/nvim-spectre'
+Plug 'ggandor/lightspeed.nvim'
+endif
+
 " Git
+if has('nvim')
+Plug 'kdheepak/lazygit.nvim'
 Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
 Plug 'theniceboy/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
+endif
 "Plug 'mhinz/vim-signify'
 Plug 'airblade/vim-gitgutter'
 Plug 'cohama/agit.vim'
-if has('nvim')
-Plug 'kdheepak/lazygit.nvim'
-endif
 
 " Undo Tree
 Plug 'mbbill/undotree'
@@ -56,23 +75,6 @@ if has('nvim')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
 Plug 'wellle/tmux-complete.vim'
-
-" File navigation
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-if has('nvim')
-Plug 'ibhagwan/fzf-lua'
-Plug 'kevinhwang91/rnvimr'
-endif
-Plug 'airblade/vim-rooter'
-Plug 'pechorin/any-jump.vim'
-"  Plug 'voldikss/vim-floaterm'
-
-" Search & Replace
-if has('nvim')
-Plug 'nvim-lua/plenary.nvim' " nvim-spectre dep
-Plug 'nvim-pack/nvim-spectre'
-endif
 
 " Markdown
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
@@ -109,7 +111,6 @@ Plug 'pantharshit00/vim-prisma'
 if has('nvim')
 Plug 'petertriho/nvim-scrollbar'
 Plug 'kevinhwang91/nvim-hlslens'
-Plug 'ggandor/lightspeed.nvim'
 endif
 "Plug 'Raimondi/delimitMate'
 Plug 'tomtom/tcomment_vim' " in <space>cn to comment a line
@@ -140,11 +141,15 @@ Plug 'reedes/vim-wordy'
 "  Plug 'luochen1990/rainbow'
 "  Plug 'mg979/vim-xtabline'
 Plug 'bagrat/vim-buffet'
-Plug 'ryanoasis/vim-devicons'
 Plug 'wincent/terminus'
+"  Plug 'voldikss/vim-floaterm'
 if has('nvim')
-Plug 'kyazdani42/nvim-web-devicons'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'nvim-tree/nvim-tree.lua'
+else
+Plug 'ryanoasis/vim-devicons'
 endif
+Plug 'preservim/nerdtree'
 
 " Other useful utilities
 Plug 'lambdalisue/suda.vim' " do stuff like :sudowrite
