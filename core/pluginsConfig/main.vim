@@ -335,7 +335,7 @@ vmap gtb :Tabularize /
 
 
 " ---- Undotrembbill/undotreee ----
-noremap L :UndotreeToggle<CR>
+noremap <leader>utt :UndotreeToggle<CR>
 let g:undotree_DiffAutoOpen = 1
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_ShortIndicators = 1
