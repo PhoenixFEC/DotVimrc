@@ -70,7 +70,6 @@ install_vim_plug() {
 # }}}
 
 # install_vim_plugins {{{
-
 # }}}
 
 # fetch_repo {{{

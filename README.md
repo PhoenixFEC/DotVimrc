@@ -29,5 +29,8 @@ Please backup your ~/.vimrc before install.
   |- plugins.vim        # [TODO] custom plugin list
 ```
 
-## Thanks
-Borrowing shamelessly from [ThinkVim](https://github.com/imxiejie/ThinkVim), [SpaceVim](https://github.com/SpaceVim/SpaceVim), [vimrc](https://github.com/amix/vimrc), [theniceboy/nvim](https://github.com/theniceboy/nvim), thank them for open source.
+## Acknowledgments
+- [ThinkVim](https://github.com/imxiejie/ThinkVim)
+- [SpaceVim](https://github.com/SpaceVim/SpaceVim)
+- [vimrc](https://github.com/amix/vimrc)
+- [theniceboy](https://github.com/theniceboy/nvim)

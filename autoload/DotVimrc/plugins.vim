@@ -1,4 +1,4 @@
-scriptencoding utf-8
+" scriptencoding utf-8
 
 " General utilities, mainly for dealing with user configuration parsing
 " ---------------

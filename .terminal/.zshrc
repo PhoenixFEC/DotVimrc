@@ -83,9 +83,10 @@ plugins=(git sudo jump web-search extract osx tmux zsh-autosuggestions zsh-synta
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
- alias zshconfig="vi ~/.zshrc"
+ alias zshconfig="vim ~/.zshrc"
  alias ohmyzsh="cd ~/.oh-my-zsh"
  alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+ alias vi="nvim"
 
 # powerlevel9k theme to iTerm2
 #source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme
@@ -99,11 +100,27 @@ plugins=(git sudo jump web-search extract osx tmux zsh-autosuggestions zsh-synta
 # Homebrew CDN 
  export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
+
+export PATH="/usr/local/sbin:$PATH"
+
 # Yarn
 ## export PATH="$PATH:`yarn global bin`"
 
+# pnpm
+export PNPM_HOME="/Users/PhoenixC/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+
 # openssl
 export PATH="/usr/local/opt/openssl/bin:$PATH"
+
+# gnubin
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
+# zlib
+export LDFLAGS="-L/usr/local/opt/zlib/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include"
+export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
 
 # icu4c
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
@@ -111,6 +128,9 @@ export PATH="/usr/local/opt/icu4c/sbin:$PATH"
 
 # sqlite3
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
+
+# go
+export PATH="/usr/local/go/bin:$PATH"
 
 # Flutter
 export PUB_HOSTED_URL=https://pub.flutter-io.cn
@@ -120,9 +140,8 @@ export PATH="$HOME/MySDK/flutter/bin:$PATH"
 # dart
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 
- source $ZSH/oh-my-zsh.sh
-# source ~/.zshrc
-
+# python
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -139,11 +158,8 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-export PATH="/usr/local/sbin:$PATH"
-
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
-
 
 # Mono
 export MONO_HOME="/Library/Frameworks/Mono.framework/Versions/6.12.0"
@@ -152,3 +168,15 @@ export PATH="$PATH:$MONO_HOME/bin"
 # fix: terminals database is inaccessible
 export TERMINFO=/usr/share/terminfo
 
+
+# FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#export FZF_DEFAULT_COMMAND="fd --exclude={.git,.idea,.vscode,.sass-cache,node_modules,.build,.cache,npm-cache} --type f"
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '(highlight -O ansi {} || bat {}) 2> /dev/null | head -500'"
+
+
+# lazygit config dir
+export XDG_CONFIG_HOME="$HOME/.config"
+
+ source $ZSH/oh-my-zsh.sh
+# source ~/.zshrc

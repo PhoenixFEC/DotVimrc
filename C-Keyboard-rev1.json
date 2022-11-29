@@ -7,16 +7,9 @@
         {
           "from": {
             "key_code": "caps_lock",
-            "modifiers": {
-              "mandatory": ["shift"],
-              "optional": ["caps_lock"]
-            }
+            "modifiers": { "mandatory": ["shift"], "optional": ["caps_lock"] }
           },
-          "to": [
-            {
-              "key_code": "caps_lock"
-            }
-          ],
+          "to": [{ "key_code": "caps_lock" }],
           "type": "basic"
         }
       ]
@@ -27,20 +20,10 @@
         {
           "from": {
             "key_code": "caps_lock",
-            "modifiers": {
-              "optional": ["any"]
-            }
+            "modifiers": { "optional": ["any"] }
           },
-          "to": [
-            {
-              "key_code": "left_control"
-            }
-          ],
-          "to_if_alone": [
-            {
-              "key_code": "escape"
-            }
-          ],
+          "to": [{ "key_code": "left_control" }],
+          "to_if_alone": [{ "key_code": "escape" }],
           "type": "basic"
         }
       ]
@@ -49,9 +32,7 @@
       "description": "Use left_control as Hyper",
       "manipulators": [
         {
-          "from": {
-            "key_code": "left_control"
-          },
+          "from": { "key_code": "left_control" },
           "to": [
             {
               "key_code": "right_shift",
@@ -82,11 +63,7 @@
               ]
             }
           },
-          "to": [
-            {
-              "shell_command": "open -a 'Obsidian.app'"
-            }
-          ],
+          "to": [{ "shell_command": "open -a 'Obsidian.app'" }],
           "type": "basic"
         }
       ]
@@ -106,11 +83,7 @@
               ]
             }
           },
-          "to": [
-            {
-              "shell_command": "open -a 'VSCode.app'"
-            }
-          ],
+          "to": [{ "shell_command": "open -a 'VSCode.app'" }],
           "type": "basic"
         }
       ]

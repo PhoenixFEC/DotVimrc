@@ -54,9 +54,6 @@ command! -bang -nargs=? -complete=dir Files
 
 command! -bang ProjectFiles caibhagwan/fzf-luall fzf#vim#files(<q-args>, <bang>0)
 
-"  --- voldikss/vim-floaterm ---
-hi FloatermBorder guibg=orange
-
 " --- ibhagwan/fzf-lua ---
 "  nnoremap <c-P> <cmd>lua require('fzf-lua').files()<CR>
 noremap <silent> <C-p> :FzfLua files<CR>
@@ -131,6 +128,9 @@ require'fzf-lua'.setup {
       theme           = 'Coldark-Dark', -- bat preview theme (bat --list-themes)
       config          = nil,            -- nil uses $BAT_CONFIG_PATH
     },
+    imacat = {
+        cmd = "imacat",
+    },
     head = {
       cmd             = "head",
       args            = nil,
@@ -154,7 +154,7 @@ require'fzf-lua'.setup {
     -- previewer      = "bat",          -- uncomment to override previewer
                                         -- (name from 'previewers' table)
                                         -- set to 'false' to disable
-    prompt            = 'Files❯ ',
+    prompt            = ' Files  ',
     multiprocess      = true,           -- run command in a separate process
     git_icons         = true,           -- show git icons?
     file_icons        = true,           -- show file icons?
@@ -169,7 +169,7 @@ require'fzf-lua'.setup {
     fd_opts           = "--color=never --type f --hidden --follow --exclude .git",
   },
   buffers = {
-    prompt            = 'Buffers❯ ',
+    prompt            = ' Buffers  ',
     file_icons        = true,         -- show file icons?
     color_icons       = true,         -- colorize file|git icons
     sort_lastused     = true,         -- sort buffers() by last used

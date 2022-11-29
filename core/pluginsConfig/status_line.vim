@@ -1,3 +1,6 @@
+"  Bottom status bar {{{
+
+" ---- nvim-lualine/lualine.nvim ----
 if g:nvim_plugins_installation_completed == 1
 lua <<EOF
 require('lualine').setup {
@@ -22,44 +25,66 @@ require('lualine').setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_c = {'location', 'filename', 'filesize'},
+    lualine_x = {'encoding', 'filetype', {
+      'fileformat',
+      symbols = {
+        mac = '',  -- e711
+        unix = '', -- e712
+        dos = '',  -- e70f
+      }
+    }},
     lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_z = {'os.date("%a %b %d  %H:%M")'} --  
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {
-    lualine_a = {'buffers'},
-    lualine_b = {'branch'},
-    lualine_c = {'filename'},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {'tabs'}
-  },
-  winbar = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
+    lualine_c = {},
     lualine_x = {},
     lualine_y = {},
     lualine_z = {}
   },
-  inactive_winbar = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  extensions = {}
+  --tabline = {
+  --  lualine_a = {},
+  --  lualine_b = {},
+  --  lualine_c = {},
+  --  lualine_x = {},
+  --  lualine_y = {},
+  --  lualine_z = {'tabs'}
+  --},
+  --winbar = {
+  --  lualine_a = {},
+  --  lualine_b = {},
+  --  lualine_c = {},
+  --  lualine_x = {},
+  --  lualine_y = {},
+  --  lualine_z = {}
+  --},
+  --inactive_winbar = {
+  --  lualine_a = {},
+  --  lualine_b = {},
+  --  lualine_c = {},
+  --  lualine_x = {},
+  --  lualine_y = {},
+  --  lualine_z = {}
+  --},
+  --extensions = {}
 }
 EOF
 endif
+
+
+"  ---- itchyny/lightline.vim ----
+"  let g:lightline = {'colorscheme': 'one'}
+"  set noshowmode
+"
+" ---- theniceboy/eleline.vim ----
+" let g:airline_powerline_fonts = 0
+
+" ---- glepnir/spaceline.vim ----
+"  let g:spaceline_seperate_style = "arrow-fade"
+"  let g:spaceline_colorscheme = "space"
+
+" }}}
+

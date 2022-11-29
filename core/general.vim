@@ -17,6 +17,7 @@ if exists("+shellslash")
   set shellslash " expand filenames with forward slash
 endif
 
+set clipboard^=unnamedplus " + register
 set autochdir " Change current work directory automatically
 set secure
 
@@ -33,7 +34,7 @@ endif
 
 " Timing {{{
 set timeout ttimeout
-set timeoutlen=500  " Time out on mappings
+set timeoutlen=300  " Time out on mappings
 set ttimeoutlen=10  " Time out on key codes
 set updatetime=100  " Idle time to write swap and trigger CursorHold
 set redrawtime=1500  " Time in milliseconds for stopping display redraw
@@ -55,7 +56,9 @@ set ffs=unix,dos,mac " Use Unix as the standard file type
 
 " set inccommand=split
 set completeopt=longest,noinsert,menuone,noselect,preview
-set complete=.,w,b,u,t
+" set complete=.,w,b,u,t
+set complete-=i   " disable scanning included files
+set complete-=t   " disable searching tags
 
 set noerrorbells
 set visualbell " Use visual bell instead of beeping
@@ -66,12 +69,18 @@ set t_vb= " it will no beep and no flash Vim's screen
 set lazyredraw
 
 " Cursor {{{
+" restore cursor position when opening file
+autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   execute "normal! g`\"" |
+    \ endif
 " set cursorline  " Highline current line
 " hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 " set cursorcolumn
 " hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 " }}}
 set mouse=nv " Disable mouse in command-line mode
+
 set ruler  " Show cursor row-col number
 set display+=lastline
 set laststatus=2  " Show status. 0 -> Hidden, 1 -> When multi-window, 2 -> Show Always
@@ -108,7 +117,7 @@ set smartindent
 set copyindent  " copy the previous indentation on autoindenting
 set cindent
 "  set paste
-set pastetoggle=<F5> " Switch the paste mode, no number to copy
+" set pastetoggle=<F5> " Switch the paste mode, no number to copy
 
 set smarttab  " Tab insert blanks according to 'shiftwidth'
 set expandtab
@@ -217,7 +226,7 @@ set wildignore+=.git,.svn  " ignore the .git directory
 set wildignore+=*.DS_Store  " ignore Mac finder/spotlight crap
 set wildignore+=**/node_modules/**,**/bower_modules/**
 set wildignore+=**/.sass-cache/**,**/npm-cache/**
-set wildignore+=__pycache__,*.egg-info,.pytest_cache,.mypy_cache/**
+set wildignore+=__pycache__,*.egg-info,.pytest_cache,.mypy_cache/**,.cache/**
 " }}}
 
 " Cache-----------
@@ -230,11 +239,10 @@ set backup
 set undofile
 set undolevels=1000
 " set noswapfile
-"  let g:data_dir=$DATA_PATH
-let g:backup_dir = g:data_dir . 'backup//'
-let g:swap_dir = g:data_dir . 'swap//'
-let g:undo_dir = g:data_dir . 'undofile//'
-let g:conf_dir = g:data_dir . 'conf'
+let g:backup_dir = g:data_dir . '/backup//'
+let g:swap_dir = g:data_dir . '/swap//'
+let g:undo_dir = g:data_dir . '/undofile//'
+let g:conf_dir = g:data_dir . '/conf'
 if finddir(g:data_dir) ==# ''
   silent call mkdir(g:data_dir, 'p', 0700)
 endif

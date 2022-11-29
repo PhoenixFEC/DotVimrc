@@ -9,7 +9,7 @@ if has('nvim')
   let g:nvim_plugins_installation_completed=1
   "if empty(glob($HOME.'/.config/nvim/plugged/wildfire.vim/autoload/wildfire.vim'))
   "  let g:nvim_plugins_installation_completed=0
-  "  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  "  autocmd VimEnter * PlugInstall --sync | source $VIMRC
   "endif
 
   " python

@@ -7,9 +7,9 @@ call DotVimrc#utils#source_file(g:vim_path, 'core/pluginsConfig/main.vim')
 call DotVimrc#utils#source_file(g:vim_path, 'core/keybinds.vim')
 call DotVimrc#utils#source_file(g:vim_path, 'core/autofixTypos.vim')
 
-let s:user_vimrc = expand($USER_CONF_DIRECTORY . '/' . g:entry_rc)
+let s:user_vimrc = expand($USER_CONF_DIRECTORY . g:entry_rc)
 if filereadable(s:user_vimrc)
-	call DotVimrc#utils#source_file($USER_CONF_DIRECTORY, '/' . g:entry_rc)
+	call DotVimrc#utils#source_file($USER_CONF_DIRECTORY, g:entry_rc)
 endif
 
 filetype on
