@@ -205,7 +205,7 @@ nnoremap <leader>km <cmd>Telescope keymaps<cr>
 
 " ---- nvim-tree/nvim-tree.lua ----
 " nnoremap <leader>nt :NvimTreeToggle<CR>
-nnoremap <leader>tt :NvimTreeOpen<CR>:NvimTreeFindFile<CR>
+nnoremap <leader>tt :NvimTreeOpen<CR><C-l>:NvimTreeFindFile<CR>
 
 
 " preservim/nerdtree
