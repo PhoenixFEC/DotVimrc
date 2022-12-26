@@ -47,5 +47,5 @@ db.custom_center = {
 }
 EOF
 
-autocmd VimEnter,BufEnter FileType dashboard set nocursorline
+autocmd VimEnter,BufEnter FileType Dashboard set nocursorline
 endif

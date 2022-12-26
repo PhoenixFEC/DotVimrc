@@ -27,7 +27,7 @@ lua <<EOF
 vim.opt.termguicolors = true
 
 require("nvim-tree").setup({
-  create_in_closed_folder = true,
+  -- create_in_closed_folder = true,
   sort_by = "case_sensitive",
   --root_dirs = {},
   view = {

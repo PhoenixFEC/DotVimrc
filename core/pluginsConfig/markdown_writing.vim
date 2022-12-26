@@ -34,7 +34,7 @@ let g:bullets_enabled_file_types = [
     \]
 
 " ---- godlygeek/tabular ----
-vmap gtb :Tabularize /
+vnoremap gtb :Tabularize /
 
 " }}}
 

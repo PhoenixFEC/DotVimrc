@@ -74,7 +74,9 @@ autocmd BufReadPost *
     \ if line("'\"") > 1 && line("'\"") <= line("$") |
     \   execute "normal! g`\"" |
     \ endif
-" set cursorline  " Highline current line
+set cursorline  " Highline current line
+set cursorlineopt=screenline,number
+hi CursorLineNr cterm=NONE ctermbg=NONE ctermfg=yellow guibg=NONE guifg=yellowgreen
 " hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 " set cursorcolumn
 " hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
