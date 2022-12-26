@@ -20,6 +20,11 @@ Please backup your ~/.vimrc before install.
 
   # for help:
   sh install.sh --help
+
+
+  # or install on remote
+  sudo bash -c "$(curl -fsSL https://github.com/PhoenixFEC/DotVimrc/releases/download/v0.1.0/install.sh)"
+  sudo bash -c "$(curl -fsSL https://github.com/PhoenixFEC/DotVimrc/releases/download/v0.1.0/install.sh --install neovim)"
   ```
 
 ## User configuration
