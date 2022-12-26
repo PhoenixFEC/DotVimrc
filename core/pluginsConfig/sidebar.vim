@@ -101,6 +101,24 @@ require("nvim-tree").setup({
 
     indent_markers = {
       enable = true
+    },
+
+    icons = {
+        show = {
+            folder_arrow = false
+        },
+        glyphs = {
+            folder = {--    
+                arrow_closed = "",
+                arrow_open = "",
+                default = "",
+                open = "",
+                empty = "",
+                empty_open = "",
+                symlink = "",
+                symlink_open = "",
+                }
+            }
     }
   },
   filters = {
