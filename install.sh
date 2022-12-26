@@ -2,7 +2,7 @@
 # option: -e 若指令传回值不等于0，则立即退出shell
 set -e
 
-VERSION="0.0.4"
+VERSION="0.1.0"
 THIS_TIME=$(date +%c)
 DotVimrc=".DotVimrc"
 
@@ -77,15 +77,22 @@ fetch_repo() {
   # DotVimrc repo
   if [[ -d "$HOME/${DotVimrc}" ]]; then
     info "Trying to update ${DotVimrc: 1}"
+
     cd "$HOME/${DotVimrc}"
     git checkout -- .
     git pull --prune --rebase
     cd - > /dev/null 2>&1
+
     success "Successfully update ${DotVimrc: 1}"
   else
     info "Trying to clone ${DotVimrc: 1}"
-    # git clone https://github.com/PhoenixFEC/${DotVimrc: 1}.git "$HOME/${DotVimrc}"
-    git clone ~/MyProjects/${DotVimrc: 1} "$HOME/${DotVimrc}"
+
+    if [[ $1 != '--dev' ]]; then
+        git clone https://github.com/PhoenixFEC/${DotVimrc: 1}.git "$HOME/${DotVimrc}"
+    else
+        git clone ~/MyProjects/${DotVimrc: 1} "$HOME/${DotVimrc}"
+    fi
+
     if [ $? -eq 0 ]; then
       # config Git Credential to cache(900s)
       git config --global credential.helper cache
@@ -125,7 +132,7 @@ install_vim() {
   fi
 
   if [[ -d "$HOME/.vim" ]]; then
-    if [[ "$(readlink $HOME/.vim)" =~ ${DotVimrc}$ ]]; then
+    if [[ "$(readlink $HOME/.vim)" =~ ${DotVimrc} ]]; then
       success "Installed ${DotVimrc: 1} for vim"
     else
       mv "$HOME/.vim" "$HOME/.vim_back"
@@ -143,7 +150,7 @@ install_vim() {
 # install_neovim {{{
 install_neovim() {
   if [[ -d "$HOME/.config/nvim" ]]; then
-    if [[ "$(readlink $HOME/.config/nvim)" =~ ${DotVimrc}$ ]]; then
+    if [[ "$(readlink $HOME/.config/nvim)" =~ ${DotVimrc} ]]; then
       success "Installed ${DotVimrc: 1} for neovim"
     else
       mv "$HOME/.config/nvim" "$HOME/.config/nvim_back"
@@ -162,7 +169,7 @@ install_neovim() {
 # uninstall_vim {{{
 uninstall_vim() {
   if [[ -d "$HOME/.vim" ]]; then
-    if [[ "$(readlink $HOME/.vim)" =~ ${DotVimrc}$ ]]; then
+    if [[ "$(readlink $HOME/.vim)" =~ ${DotVimrc} ]]; then
       rm "$HOME/.vim"
       success "Uninstall ${DotVimrc: 1} for vim"
       if [[ -d "$HOME/.vim_back" ]]; then
@@ -181,7 +188,7 @@ uninstall_vim() {
 # uninstall_neovim {{{
 uninstall_neovim() {
   if [[ -d "$HOME/.config/nvim" ]]; then
-    if [[ "$(readlink $HOME/.config/nvim)" =~ ${DotVimrc}$ ]]; then
+    if [[ "$(readlink $HOME/.config/nvim)" =~ ${DotVimrc} ]]; then
       rm "$HOME/.config/nvim"
       success "Uninstall ${DotVimrc: 1} for neovim"
       if [[ -d "$HOME/.config/nvim_back" ]]; then
@@ -273,57 +280,77 @@ main() {
     esac
 
     case $1 in
-      #-tt)
-      #  write_to_conf ${VIM_PLUGIN_MANAGER}
-      #  exit 0
-      #;;
+        --dev)
+            fetch_repo ${VIM_PLUGIN_MANAGER}
 
-      --install|-i)
-        fetch_repo ${VIM_PLUGIN_MANAGER}
+            if [ $# -eq 2 ]; then
+            case $2 in
+                'vim')
+                install_vim
+                ;;
 
-        if [ $# -eq 2 ]; then
-          case $2 in
-            'vim')
-              install_vim
-            ;;
+                'neovim')
+                install_neovim
+                ;;
 
-            'neovim')
-              install_neovim
-            ;;
+                *)
+                install_vim
+                install_neovim
+                ;;
+            esac
+            fi
 
-            *)
-              install_vim
-              install_neovim
-            ;;
-          esac
-        fi
+            install_done $2
 
-        install_done $2
+            exit 0
+        ;;
 
-        exit 0
-      ;;
+        --install|-i)
+            fetch_repo ${VIM_PLUGIN_MANAGER}
 
-      --uninstall|-un)
-        uninstall_vim
-        uninstall_neovim
+            if [ $# -eq 2 ]; then
+            case $2 in
+                'vim')
+                install_vim
+                ;;
 
-        echo_with_color ""
-        echo_with_color ${BWhite} "Looking forward to meeting you again"
-        echo_with_color ${BWhite} "Thanks!"
-        echo_with_color ""
+                'neovim')
+                install_neovim
+                ;;
 
-        exit 0
-      ;;
+                *)
+                install_vim
+                install_neovim
+                ;;
+            esac
+            fi
 
-      --version|-v)
-        msg "V${VERSION}"
-        exit 0
-      ;;
+            install_done $2
 
-      --help|-h)
-        helper
-        exit 0
-      ;;
+            exit 0
+        ;;
+
+        --uninstall|-un)
+            uninstall_vim
+            uninstall_neovim
+
+            echo_with_color ""
+            echo_with_color ${BWhite} "Looking forward to meeting you again"
+            echo_with_color ${BWhite} "Thanks!"
+            echo_with_color ""
+
+            exit 0
+        ;;
+
+        --version|-v)
+            msg "V${VERSION}"
+            exit 0
+        ;;
+
+        --help|-h)
+            helper
+            exit 0
+        ;;
     esac
 
   else
