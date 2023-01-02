@@ -12,7 +12,7 @@ require("telescope").setup {
         prompt_position = "top",
         width = 0.8
     },
-    prompt_prefix = ">>> ",
+    prompt_prefix = " ⚡︎ ",
     sorting_strategy = "ascending",
     --wrap_results = true,
     file_ignore_patterns = {"^node_modules/"}

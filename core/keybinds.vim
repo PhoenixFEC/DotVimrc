@@ -47,7 +47,7 @@ noremap <Leader><S-Tab> :Bw!<CR>
 nnoremap <leader>bb :buffers<CR>:b<space>
 
 " Create a new tab
-nnoremap <silent> <leader>t :tabnew<CR>
+nnoremap <silent> <leader>tn :tabnew<CR>
 
 
 " yank/paste to/from the OS clipboard
@@ -78,7 +78,7 @@ nnoremap <silent> <leader>hl3 :highlight Highlight3 ctermfg=0 ctermbg=46 guifg=B
 " close current buffer or current [No Name] window
 function! QuitBuffer()
     if (len(expand('%')) > 0) 
-        bd
+        bdelete #
     else
         q
     endif
@@ -150,8 +150,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-" switch between windows by hitting <Tab> twice
-nnoremap <silent> <Tab><Tab> <C-w>w
 " window resizing
 noremap <S-Left> <C-w><
 noremap <S-Down> <C-w>-

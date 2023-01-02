@@ -17,4 +17,3 @@ tnoremap   <silent>   <F7>   <C-\><C-n>:FloatermToggle<CR>
 " " Set floaterm window foreground to gray once the cursor moves out from it
 " hi FloatermNC guifg=gray
 
-

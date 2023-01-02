@@ -2,7 +2,7 @@
 # option: -e 若指令传回值不等于0，则立即退出shell
 set -e
 
-VERSION="0.1.0"
+VERSION="0.1.1"
 THIS_TIME=$(date +%c)
 DotVimrc=".DotVimrc"
 
